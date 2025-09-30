@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Administración</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Administración</h1>
+        </header>
+
+        <nav class="tabs-container">
+            <div class="tab active" data-tab="guide">Guía</div>
+            <div class="tab" data-tab="info">Info</div>
+            <div class="tab" data-tab="admin">Puntos Admin</div>
+            <div class="tab" data-tab="oleada">Puntos Oleada</div>
+            <div class="tab" data-tab="rangos">Rangos</div>
+            <div class="tab" data-tab="novedades">Novedades</div>
+        </nav>
+
+        <main class="content">
+            <!-- Guía -->
+            <section id="guide" class="tab-content active">
+                <h2>Guía</h2>
+                <div class="card">
+                    <h3>1. Comandos de Admin</h3>
+                    <p><b>#kick</b> → Banear usuarios</p>
+                    <p><b>#del</b> → Eliminar usuarios</p>
+                    <p><b>#close</b> → Cerrar grupo</p>
+                    <p><b>#open</b> → Abrir grupo</p>
+                    <div class="note">
+                        ⚠️ Para usar <b>#kick</b> debes mencionar a @Usuario o responder a un mensaje del usuario que
+                        quieras banear.
+                    </div>
+                    <div class="note">
+                        ⚠️ Para usar <b>#del</b> debes responder a un mensaje que quieras borrar
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>2. Ayuda para hacer oleadas</h3>
+                    <div class="note">
+                        ⚠️ Las oleadas solamente las hacen los <b>Owners</b>, y si lo eres Jow te mandará el link de una
+                        página donde se hacen las oleadas
+                    </div>
+                    <ol>
+                        <li><strong>Nombre del grupo:</strong> Escribe el nombre real del grupo que te tocó.</li>
+                        <li><strong>Enlace de invitación:</strong> Entra a tu grupo de WhatsApp. Ve a Enlace de
+                            invitación a grupo. Selecciona Restablecer enlace. Copia el nuevo enlace y pégalo en el
+                            campo.</li>
+                        <li><strong>¿Aceptas contenido sexual o para adultos?</strong>
+                            <ul>
+                                <li>⬜ No</li>
+                                <li>⬜ Sí</li>
+                            </ul>
+                            Selecciona No (a menos que tu grupo sea +18).
+                        </li>
+                        <li><strong>¿Aceptas miembros de cualquier país?</strong>
+                            <ul>
+                                <li>⬜ No. Solo usuarios de mi país</li>
+                                <li>⬜ Sí. Todo el mundo puede unirse</li>
+                            </ul>
+                            Selecciona Sí para que todos puedan entrar.
+                        </li>
+                        <li><strong>Tu correo electrónico:</strong> Escribe tu correo (de preferencia Gmail). Escríbelo
+                            2 veces para confirmarlo.</li>
+                        <li><strong>Descripción del grupo:</strong> Escribe una breve descripción del grupo. <em>(No
+                                importa mucho qué pongas, con que tenga sentido).</em></li>
+                        <li><strong>Tu ciudad (opcional):</strong> ⚠️ No es recomendable poner tu ciudad real para
+                            evitar problemas de privacidad.</li>
+                        <li><strong>Categorías:</strong> Puedes elegir una, pero no es obligatorio.</li>
+                        <li><strong>Etiquetas:</strong> Escribe de qué trata tu grupo. Deben ir separadas por coma y con
+                            espacios entre palabras. <em>Ejemplo: jugar minecraft, amigos 23 años, salir de fiesta,
+                                memes divertidos.</em></li>
+                        <li><strong>Aceptar condiciones:</strong> Marca la casilla: ☑️ He leído y acepto las condiciones
+                            de uso y la privacidad. Haz clic en Continuar.</li>
+                        <li><strong>Revisar y publicar:</strong> Revisa que el nombre, descripción y correo estén
+                            correctos. Si hay un error, corrígelo. Si todo está bien, haz clic en Correcto, Publicar ✅.
+                        </li>
+                        <li><strong>✅ ¡Y listo!</strong> Tu grupo quedará publicado en la página.</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>3. Guía de las Tablas</h3>
+                    <h4>📊 Guía de funcionamiento de la tabla de puntos</h4>
+                    <h4>⚔️ Tabla de puntos de Admins</h4>
+                    <ul>
+                        <li>Cada <strong>admin</strong> empieza con una cantidad determinada de puntos.</li>
+                        <li>Si los puntos llegan a <strong>0</strong>, se le baja de rango automáticamente.</li>
+                        <li>Cada día se <strong>resta -1 punto</strong> de forma automática a todos los admins.</li>
+                        <li>Los puntos se pueden recuperar o aumentar de la siguiente forma:
+                            <ul>
+                                <li>Cumplir con las labores de administrador: <strong>+2 puntos</strong></li>
+                                <li>Ser activo en la comunidad: <strong>+1 punto</strong></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h4>🌊 Tabla de Oleadas</h4>
+                    <ul>
+                        <li>Esta tabla solo sube cuando los <strong>Owners realizan oleadas</strong>.</li>
+                        <li>Las oleadas son eventos o actividades especiales organizadas por los Owners que sirven para
+                            que usuarios entren a los grupos de la comunidad.</li>
+                        <li>Cuantas más oleadas se hagan, más sube la puntuación en esta tabla.</li>
+                    </ul>
+                    <h4>⚠️ Importante</h4>
+                    <ul>
+                        <li>Si un admin no participa ni cumple sus tareas, sus puntos bajarán poco a poco hasta llegar a
+                            0.</li>
+                        <li>Mantenerse activo y cumplir con el rol de admin asegura que no pierdas tu rango.</li>
+                        <li>Las oleadas dependen <strong>exclusivamente de los Owners</strong>, no de los admins
+                            comunes.</li>
+                        <li>Cuando el contador llegue a 0, tendrás un plazo de 12 horas antes de perder los privilegios
+                            de administrador.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Info -->
+            <section id="info" class="tab-content">
+                <h2>Info</h2>
+                <div class="card">
+                    <h3>❓ Preguntas Frecuentes</h3>
+                    <p><b>1. ¿Qué son las oleadas?</b><br> Son los momentos en que se publica un nuevo grupo en la
+                        página.</p>
+                    <p><b>2. ¿Qué son los rangos?</b><br> Jerarquía de la administración según el rol y su importancia.
+                    </p>
+                    <p><b>3. Si soy admin, ¿qué debo hacer?</b><br> Consulta la sección de rangos para conocer tu rol y
+                        deberes.</p>
+                    <p><b>4. ¿Qué pasa si rompo las reglas?</b><br> Se descuentan puntos de tu tabla y puedes ser
+                        degradado o expulsado.</p>
+                    <p><b>5. ¿Puedo renunciar a ser admin?</b><br> Sí, pero perderás todos los privilegios. Además,
+                        <b>si sales del grupo de admins, se tomará automáticamente como renuncia definitiva</b>.</p>
+                </div>
+
+                <div class="card">
+                    <h3>📜 Términos y Condiciones</h3>
+                    <h4>Definiciones</h4>
+                    <p>Jow es el dueño absoluto de la comunidad y toma las decisiones finales. Los owners pueden
+                        decidir, pero no contradecir a Jow. Los admins de menor jerarquía solo deciden si están de
+                        acuerdo todos.</p>
+
+                    <h4>Aceptación</h4>
+                    <p>Si usas la comunidad aceptas estas condiciones, incluso si no las lees.</p>
+
+                    <h4>Reglas de Admin</h4>
+                    <ul>
+                        <li>No quitarse admin entre sí. <b>-2 puntos</b></li>
+                        <li>Los owners pueden bajar admins de menor rango, pero no a otro owner salvo mala conducta.
+                            <b>-2 puntos</b></li>
+                        <li>No eliminar grupos de la comunidad. <b>-3 puntos</b></li>
+                        <li>No añadir grupos si no eres owner. <b>-1 punto</b></li>
+                        <li>No pelear con otros admins. <b>-1 punto</b></li>
+                        <li>Debes obedecer si se te pide algo. <b>-1 punto</b></li>
+                        <li>No asumir un rol que no te corresponde. <b>-1 punto</b></li>
+                        <li>No abusar de tu poder. <b>-2 puntos</b></li>
+                        <li>No conspirar contra los owners. <b>-1 punto</b></li>
+                        <li>No ignorar a usuarios que rompan reglas. <b>-2 puntos</b></li>
+                        <li>No banear gente sin razón. <b>-2 puntos</b></li>
+                        <li>No romper las reglas de los grupos. <b>-2 puntos</b></li>
+                    </ul>
+
+                    <h4>Propiedad</h4>
+                    <p>Si eres owner y creaste un grupo, tú mandas en él. Los grupos que no creaste no te pertenecen.
+                    </p>
+
+                    <h4>Limitaciones</h4>
+                    <p>La comunidad no se hace responsable por pérdidas de datos, problemas técnicos o cualquier daño
+                        derivado del uso del servicio.</p>
+                </div>
+            </section>
+
+            <!-- Puntos Admin -->
+            <section id="admin" class="tab-content">
+                <h2>Puntos Admin</h2>
+                <div class="card">
+                    <table id="admin-points">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Puntos Admin</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-points-body">
+                            <!-- Los datos se cargan dinamicamente desde JS -->
+                        </tbody>
+                    </table>
+
+                    <div class="status-info">
+                        <h3>Estados de Puntos Admin</h3>
+                        <ul>
+                            <li>0 puntos: <span class="admin-0 circle">⚠️</span> - Crítico</li>
+                            <li>1 punto: <span class="admin-1 circle"></span> - Bajo</li>
+                            <li>2 puntos: <span class="admin-2 circle"></span> - Mejorable</li>
+                            <li>3 puntos: <span class="admin-3 circle"></span> - Medio</li>
+                            <li>4 puntos: <span class="admin-4 circle"></span> - Okey</li>
+                            <li>5 puntos: <span class="admin-5 circle"></span> - Bien</li>
+                        </ul>
+                        <p>Puntos máximos posibles: 5</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Puntos Oleada -->
+            <section id="oleada" class="tab-content">
+                <h2>Puntos Oleada</h2>
+                <div class="card">
+                    <table id="oleada-points">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Puntos Oleada</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="oleada-points-body">
+                            <!-- Los datos se cargan dinamicamente desde JS -->
+                        </tbody>
+                    </table>
+
+                    <div class="status-info">
+                        <h3>Estados de Puntos Oleada</h3>
+                        <ul>
+                            <li>0 puntos: <span class="oleada-0 circle">⚠️</span> - Crítico</li>
+                            <li>1 punto: <span class="oleada-1 circle"></span> - Bajo</li>
+                            <li>2 puntos: <span class="oleada-2 circle"></span> - Medio</li>
+                            <li>3 puntos: <span class="oleada-3 circle"></span> - Bien</li>
+                        </ul>
+                        <p>Puntos máximos posibles: 3</p>
+                    </div>
+
+                    <h3>Grupos a los que deben hacer oleada</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Grupo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Celeste, E</td>
+                                <td>Bot</td>
+                            </tr>
+                            <tr>
+                                <td>Nose</td>
+                                <td>Porno</td>
+                            </tr>
+                            <tr>
+                                <td>Leandro</td>
+                                <td>Juegos PSP</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="note">
+                        Si el enlace del grupo fue suspendido temporalmente, dígale a uno de los Owners
+                        que están haciendo oleadas en los grupos si pueden hacer oleada ahí.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Rangos -->
+            <section id="rangos" class="tab-content">
+                <h2>Rangos de Admin</h2>
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rango</th>
+                                <th>Nombre(s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>👑 Creador</td>
+                                <td><b>Jow</b></td>
+                            </tr>
+                            <tr>
+                                <td>🛡️ Owners</td>
+                                <td>Celeste, AgusNicolini, Nose, Leandro, E</td>
+                            </tr>
+                            <tr>
+                                <td>⚔️ OfAdmins</td>
+                                <td>Josue, Shady, Gaxoli, Juan</td>
+                            </tr>
+                            <tr>
+                                <td>📋 PreAdmins</td>
+                                <td>Diego, Nose2, Kev, Yuka, Vahgo, Joel</td>
+                            </tr>
+                            <tr>
+                                <td>🤖 Bots</td>
+                                <td>GataBot</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Grupos asignados a PreAdmins</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PreAdmin</th>
+                                <th>Grupo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Yuka, kev</td>
+                                <td>Bot</td>
+                            </tr>
+                            <tr>
+                                <td>Nose2, Vahgo</td>
+                                <td>Porno</td>
+                            </tr>
+                            <tr>
+                                <td>Diego, Joel</td>
+                                <td>Juegos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="card">
+                        <h3>2. Rangos de Admins</h3>
+                        <h4>👑 <b>Owners</b> (Dueños / Administradores principales)</h4>
+                        <p>Son el máximo rango dentro de la comunidad.</p>
+                        <p>Tienen la última palabra en las decisiones importantes.</p>
+                        <p>Se encargan de organizar y planear las oleadas <i>(eventos, publicaciones o campañas que haga
+                                la comunidad)</i>.</p>
+                        <p>Supervisan que todo funcione correctamente.</p>
+
+                        <h4>🛡️ <b>OfAdmins</b> (Oficiales Administradores)</h4>
+                        <p>Son el apoyo directo de los Owners.</p>
+                        <p>Ayudan con las tareas que los Owners les asignen.</p>
+                        <p>Tienen permiso para administrar los grupos, gestionando miembros y configuraciones.</p>
+                        <p>Actúan como "mano derecha" de los Owners.</p>
+
+                        <h4>⚔️ <b>UnAdmins</b> (Administradores comunes)</h4>
+                        <p>Su función principal es mantener el orden en los grupos.</p>
+                        <p>Se encargan de moderar chats, borrando mensajes, contenido o usuarios que rompan las reglas.
+                        </p>
+                        <p>No toman decisiones grandes, pero mantienen la disciplina.</p>
+
+                        <h4>🤖 <b>Bots</b></h4>
+                        <p>Son cuentas automatizadas programadas para hacer tareas de forma automática.</p>
+                        <p>Pueden dar avisos, aplicar sanciones, dar la bienvenida a nuevos miembros, eliminar spam o
+                            realizar acciones rápidas que faciliten la administración.</p>
+                    </div>
+
+                    <h3>Rangos en servers</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rango</th>
+                                <th>Nombre(s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>👑 Creador</td>
+                                <td><b>Jow</b></td>
+                            </tr>
+                            <tr>
+                                <td>🛡️ Owners</td>
+                                <td>Josue, Agus</td>
+                            </tr>
+                            <tr>
+                                <td>⚔️ Moderadores</td>
+                                <td>---</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Novedades -->
+            <section id="novedades" class="tab-content">
+                <h2>Novedades</h2>
+                <div class="novedades-container">
+                    <div class="card">
+                        <h3>Nueva pestaña y subidas de rango</h3>
+                        <p>Nose2 ha sido nombrado owner, Diego fue degradado a PreAdmin y Nose fue añadido a la
+                            administración</p>
+                        <div class="date">Fecha: 23/08/2025 4:36 PM</div>
+                    </div>
+                    <div class="card">
+                        <h3>Nuevos admins y removidas de rango</h3>
+                        <p>Shady y Nose2 han sido nombrados PreAdmin, Gregory fue expulsado de la administración por
+                            rebelarse</p>
+                        <div class="date">Fecha: 22/08/2025 7:48 PM</div>
+                    </div>
+                    <div class="card">
+                        <h3>Nueva norma</h3>
+                        <p>Si tu contador llega a 0 tendrás un tiempo límite de 12 horas antes de que seas removido de
+                            admin</p>
+                        <div class="date">Fecha: 20/08/2025 1:35 PM</div>
+                    </div>
+                    <div class="card">
+                        <h3>Bajas de admin</h3>
+                        <p>Nose ha renunciado, Motivo: No especificado</p>
+                        <div class="date">Fecha: 19/08/2025 9:41 PM</div>
+                    </div>
+                    <div class="card">
+                        <h3>Bajas y subidas de rango</h3>
+                        <p>Gaxoli ha sido bajado a el rango OfAdmin y Alejandro ha sido ascendido a owner</p>
+                        <div class="date">Fecha: 19/08/2025 7:05 PM</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
