@@ -14,10 +14,10 @@ let adminUsers = [
 ];
 
 let oleadaUsers = [
-  { nombre: "Nose", puntos_oleada: 2 },
-  { nombre: "Celeste", puntos_oleada: 2 },
+  { nombre: "Nose", puntos_oleada: 1 },
+  { nombre: "Celeste", puntos_oleada: 1 },
   { nombre: "Leandro", puntos_oleada: 3 },
-  { nombre: "E", puntos_oleada: 2 },
+  { nombre: "E", puntos_oleada: 1 },
 ];
 
 // Función para inicializar la aplicación
