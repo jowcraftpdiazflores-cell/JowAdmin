@@ -9,7 +9,6 @@ let adminUsers = [
   { nombre: "Celeste", puntos_admin: 5 },
   { nombre: "Shady", puntos_admin: 5 },
   { nombre: "Yuka", puntos_admin: 2 },
-  { nombre: "Agus", puntos_admin: 6 },
   { nombre: "Joel", puntos_admin: 2 },
   { nombre: "Juan", puntos_admin: 3 },
 ];
