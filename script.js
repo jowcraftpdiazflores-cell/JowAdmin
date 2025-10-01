@@ -1,16 +1,17 @@
 // Datos iniciales
 let adminUsers = [
-  { nombre: "Vahgo", puntos_admin: 3 },
-  { nombre: "Nose", puntos_admin: 4 },
-  { nombre: "Nose2", puntos_admin: 3 },
-  { nombre: "Diego", puntos_admin: 3 },
+  { nombre: "Vahgo", puntos_admin: 2 },
+  { nombre: "Nose", puntos_admin: 3 },
+  { nombre: "Nose2", puntos_admin: 2 },
+  { nombre: "Diego", puntos_admin: 2 },
   { nombre: "Josue", puntos_admin: 3 },
-  { nombre: "Gaxoli", puntos_admin: 3 },
-  { nombre: "Celeste", puntos_admin: 4 },
-  { nombre: "Shady", puntos_admin: 4 },
-  { nombre: "Yuka", puntos_admin: 3 },
-  { nombre: "Agus", puntos_admin: 4 },
-  { nombre: "Joel", puntos_admin: 3 },
+  { nombre: "Gaxoli", puntos_admin: 4 },
+  { nombre: "Celeste", puntos_admin: 5 },
+  { nombre: "Shady", puntos_admin: 5 },
+  { nombre: "Yuka", puntos_admin: 2 },
+  { nombre: "Agus", puntos_admin: 6 },
+  { nombre: "Joel", puntos_admin: 2 },
+  { nombre: "Juan", puntos_admin: 3 },
 ];
 
 let oleadaUsers = [
