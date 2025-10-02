@@ -6,17 +6,17 @@ let adminUsers = [
   { nombre: "Diego", puntos_admin: 2 },
   { nombre: "Josue", puntos_admin: 3 },
   { nombre: "Gaxoli", puntos_admin: 4 },
-  { nombre: "Celeste", puntos_admin: 5 },
-  { nombre: "Shady", puntos_admin: 5 },
+  { nombre: "", puntos_admin:  },
+  { nombre: "", puntos_admin:  },
   { nombre: "Yuka", puntos_admin: 2 },
   { nombre: "Joel", puntos_admin: 2 },
   { nombre: "Juan", puntos_admin: 3 },
 ];
 
 let oleadaUsers = [
-  { nombre: "Nose", puntos_oleada: 1 },
-  { nombre: "Celeste", puntos_oleada: 1 },
-  { nombre: "Leandro", puntos_oleada: 3 },
+  { nombre: "Nose", puntos_oleada: 0 },
+  { nombre: "", puntos_oleada:  },
+  { nombre: "Leandro", puntos_oleada: 4 },
   { nombre: "E", puntos_oleada: 1 },
 ];
 
