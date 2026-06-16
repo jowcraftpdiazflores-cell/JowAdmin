@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const STORAGE_KEY = "staffMembers";
 const APPEALS_KEY = "appeals";
 const LAST_UPDATE_KEY = "lastPointUpdate";
@@ -62,25 +61,6 @@ let appeals = [
     plazo: "12h restantes",
     estado: "En revisión",
   },
-=======
-// Datos iniciales
-let adminUsers = [
-  { nombre: "Vahgo", puntos_admin: 3 },
-  { nombre: "Nose", puntos_admin: 4 },
-  { nombre: "Nose2", puntos_admin: 4 },
-  { nombre: "Diego", puntos_admin: 3 },
-  { nombre: "Josue", puntos_admin: 5 },
-  { nombre: "Gaxoli", puntos_admin: 3 },
-  { nombre: "Yuka", puntos_admin: 5 },
-  { nombre: "Joel", puntos_admin: 3 },
-  { nombre: "Juan", puntos_admin: 3 },
-];
-
-let oleadaUsers = [
-  { nombre: "Nose", puntos_oleada: 0 },
-  { nombre: "Leandro", puntos_oleada: 3 },
-  { nombre: "E", puntos_oleada: 0 },
->>>>>>> ae4d5081f4955a7d792a4d4c8871d7e8560a6000
 ];
 
 function initApp() {
@@ -369,14 +349,4 @@ function updateStaffPoints(nombre, nuevosPuntos) {
 
 document.addEventListener("DOMContentLoaded", initApp);
 
-<<<<<<< HEAD
 window.updateStaffPoints = updateStaffPoints;
-=======
-// Hacer las funciones de actualización disponibles globalmente para el administrador
-window.updateAdminPoints = updateAdminPoints;
-window.updateOleadaPoints = updateOleadaPoints;
-
-// ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-// CADA DÍA SE RESTA 1 PUNTO AUTOMÁTICAMENTE A TODOS LOS ADMINS (aquí puedes sumar puntos manualmente usando updateAdminPoints(nombre, nuevoValor))
-// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
->>>>>>> ae4d5081f4955a7d792a4d4c8871d7e8560a6000
