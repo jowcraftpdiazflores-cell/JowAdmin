@@ -25,12 +25,16 @@
 
         <section class="stats-grid">
             <article class="stat-card">
-                <span class="stat-label">Staff registrado</span>
-                <strong id="total-staff">0</strong>
+                <span class="stat-label">Owners</span>
+                <strong id="total-owners">0</strong>
             </article>
             <article class="stat-card">
-                <span class="stat-label">Inspectores</span>
-                <strong id="total-inspectors">0</strong>
+                <span class="stat-label">Admins</span>
+                <strong id="total-admins">0</strong>
+            </article>
+            <article class="stat-card">
+                <span class="stat-label">Testers</span>
+                <strong id="total-testers">0</strong>
             </article>
             <article class="stat-card">
                 <span class="stat-label">En riesgo</span>
@@ -40,6 +44,23 @@
                 <span class="stat-label">Apelaciones</span>
                 <strong id="open-appeals">0</strong>
             </article>
+        </section>
+
+        <section class="distribution-card">
+            <div class="distribution-header">
+                <h3>Distribución del staff</h3>
+                <p>Resumen rápido por rango principal.</p>
+            </div>
+            <div class="distribution-bar" aria-label="Distribución del staff por rango">
+                <span id="owners-bar" class="distribution-segment segment-owner"></span>
+                <span id="admins-bar" class="distribution-segment segment-admin"></span>
+                <span id="testers-bar" class="distribution-segment segment-tester"></span>
+            </div>
+            <div class="distribution-legend">
+                <span><i class="legend-dot segment-owner"></i>Owners <strong id="owners-legend">0</strong></span>
+                <span><i class="legend-dot segment-admin"></i>Admins <strong id="admins-legend">0</strong></span>
+                <span><i class="legend-dot segment-tester"></i>Testers <strong id="testers-legend">0</strong></span>
+            </div>
         </section>
 
         <nav class="tabs-container">

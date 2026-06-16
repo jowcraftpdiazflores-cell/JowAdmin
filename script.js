@@ -251,21 +251,40 @@ function renderAppealsTable() {
 }
 
 function renderDashboardStats() {
-  const totalStaff = document.getElementById("total-staff");
-  const totalInspectors = document.getElementById("total-inspectors");
+  const totalOwners = document.getElementById("total-owners");
+  const totalAdmins = document.getElementById("total-admins");
+  const totalTesters = document.getElementById("total-testers");
   const staffAtRisk = document.getElementById("staff-at-risk");
   const openAppeals = document.getElementById("open-appeals");
+  const ownersLegend = document.getElementById("owners-legend");
+  const adminsLegend = document.getElementById("admins-legend");
+  const testersLegend = document.getElementById("testers-legend");
+  const ownersBar = document.getElementById("owners-bar");
+  const adminsBar = document.getElementById("admins-bar");
+  const testersBar = document.getElementById("testers-bar");
 
-  totalStaff.textContent = String(staffMembers.length);
-  totalInspectors.textContent = String(
-    staffMembers.filter((member) => member.cargos.includes("Inspector")).length
-  );
+  const ownerCount = staffMembers.filter((member) => member.rango === "Owner").length;
+  const adminCount = staffMembers.filter((member) => member.rango === "Admin").length;
+  const testerCount = staffMembers.filter((member) => member.rango === "Tester").length;
+  const totalWithRange = Math.max(ownerCount + adminCount + testerCount, 1);
+
+  totalOwners.textContent = String(ownerCount);
+  totalAdmins.textContent = String(adminCount);
+  totalTesters.textContent = String(testerCount);
   staffAtRisk.textContent = String(
     staffMembers.filter((member) => member.puntos <= 2).length
   );
   openAppeals.textContent = String(
     appeals.filter((appeal) => appeal.estado !== "Cerrada").length
   );
+
+  ownersLegend.textContent = String(ownerCount);
+  adminsLegend.textContent = String(adminCount);
+  testersLegend.textContent = String(testerCount);
+
+  ownersBar.style.width = `${(ownerCount / totalWithRange) * 100}%`;
+  adminsBar.style.width = `${(adminCount / totalWithRange) * 100}%`;
+  testersBar.style.width = `${(testerCount / totalWithRange) * 100}%`;
 }
 
 function renderTags(tags) {
