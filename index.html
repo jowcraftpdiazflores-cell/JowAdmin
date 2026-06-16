@@ -4,388 +4,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Administración</title>
+    <title>Panel de Staff Discord</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <header>
-            <h1>Sistema de Administración</h1>
+        <header class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow">Comunidad Jow</span>
+                <h1>Panel de Staff Discord</h1>
+                <p>Base administrativa para controlar actividad, puntos, rangos, apelaciones y seguimiento del staff.
+                </p>
+            </div>
+            <div class="hero-side card compact-card">
+                <h3>Estado del sistema</h3>
+                <p>Versión plantilla enfocada en Discord. La automatización con bot y cuentas se añadirá después.</p>
+            </div>
         </header>
 
+        <section class="stats-grid">
+            <article class="stat-card">
+                <span class="stat-label">Staff registrado</span>
+                <strong id="total-staff">0</strong>
+            </article>
+            <article class="stat-card">
+                <span class="stat-label">Inspectores</span>
+                <strong id="total-inspectors">0</strong>
+            </article>
+            <article class="stat-card">
+                <span class="stat-label">En riesgo</span>
+                <strong id="staff-at-risk">0</strong>
+            </article>
+            <article class="stat-card">
+                <span class="stat-label">Apelaciones</span>
+                <strong id="open-appeals">0</strong>
+            </article>
+        </section>
+
         <nav class="tabs-container">
-            <div class="tab active" data-tab="guide">Guía</div>
-            <div class="tab" data-tab="info">Info</div>
-            <div class="tab" data-tab="admin">Puntos Admin</div>
-            <div class="tab" data-tab="oleada">Puntos Oleada</div>
-            <div class="tab" data-tab="rangos">Rangos</div>
-            <div class="tab" data-tab="novedades">Novedades</div>
+            <button class="tab active" data-tab="guide" type="button">Guía</button>
+            <button class="tab" data-tab="staff" type="button">Staff</button>
+            <button class="tab" data-tab="points" type="button">Puntos</button>
+            <button class="tab" data-tab="rangos" type="button">Rangos y Cargos</button>
+            <button class="tab" data-tab="appeals" type="button">Apelaciones</button>
+            <button class="tab" data-tab="rules" type="button">Normas</button>
+            <button class="tab" data-tab="novedades" type="button">Novedades</button>
         </nav>
 
         <main class="content">
-            <!-- Guia -->
             <section id="guide" class="tab-content active">
-                <h2>Guía</h2>
+                <h2>Guía General</h2>
+
                 <div class="card">
-                    <h3>1. Comandos de Admin</h3>
-                    <p><b>#kick</b> → Banear usuarios</p>
-                    <p><b>#del</b> → Eliminar usuarios</p>
-                    <p><b>#close</b> → Cerrar grupo</p>
-                    <p><b>#open</b> → Abrir grupo</p>
-                    <div class="note">
-                        ⚠️ Para usar <b>#kick</b> debes mencionar a @Usuario o responder a un mensaje del usuario que
-                        quieras banear.
-                    </div>
-                    <div class="note">
-                        ⚠️ Para usar <b>#del</b> debes responder a un mensaje que quieras borrar
+                    <h3>Cómo está pensado el sistema</h3>
+                    <div class="info-grid">
+                        <article>
+                            <h4>1. Actividad</h4>
+                            <p>La actividad del staff se medirá en Discord y servirá como base para mantener o recuperar
+                                puntos.</p>
+                        </article>
+                        <article>
+                            <h4>2. Inspección</h4>
+                            <p>Los inspectores revisarán desempeño, ajustarán puntos y avisarán a los Owners cuando haga
+                                falta intervenir.</p>
+                        </article>
+                        <article>
+                            <h4>3. Degradación</h4>
+                            <p>Al llegar a 0 puntos, el sistema bajará de rango y abrirá una apelación privada para
+                                revisión.</p>
+                        </article>
+                        <article>
+                            <h4>4. Apelación</h4>
+                            <p>El miembro afectado podrá apelar durante 24 horas antes de que se confirme o revierta el
+                                caso.</p>
+                        </article>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3>2. Ayuda para hacer oleadas</h3>
+                    <h3>Reglas base de puntos</h3>
+                    <ul>
+                        <li>Todos los miembros del staff empiezan con <strong>7 puntos</strong>.</li>
+                        <li>Los puntos bajan automáticamente cada 24 horas si no hay actividad suficiente.</li>
+                        <li>Hablar y cumplir funciones podrá sumar una cantidad pequeña de puntos.</li>
+                        <li>Los inspectores pueden sumar o restar puntos manualmente con motivo.</li>
+                        <li>El máximo de puntos visibles en esta plantilla es <strong>7</strong>.</li>
+                    </ul>
                     <div class="note">
-                        ⚠️ Las oleadas solamente las hacen los <b>Owners</b>, y si lo eres Jow te mandará el link de una
-                        página donde se hacen las oleadas
+                        Esta página es la base visual del sistema. Más adelante se conectará al bot y a las cuentas para
+                        automatizar todo el flujo.
                     </div>
+                </div>
+
+                <div class="card">
+                    <h3>Flujo operativo recomendado</h3>
                     <ol>
-                        <li><strong>Nombre del grupo:</strong> Escribe el nombre real del grupo que te tocó.</li>
-                        <li><strong>Enlace de invitación:</strong> Entra a tu grupo de WhatsApp. Ve a Enlace de
-                            invitación a grupo. Selecciona Restablecer enlace. Copia el nuevo enlace y pégalo en el
-                            campo.</li>
-                        <li><strong>¿Aceptas contenido sexual o para adultos?</strong>
-                            <ul>
-                                <li>⬜ No</li>
-                                <li>⬜ Sí</li>
-                            </ul>
-                            Selecciona No (a menos que tu grupo sea +18).
-                        </li>
-                        <li><strong>¿Aceptas miembros de cualquier país?</strong>
-                            <ul>
-                                <li>⬜ No. Solo usuarios de mi país</li>
-                                <li>⬜ Sí. Todo el mundo puede unirse</li>
-                            </ul>
-                            Selecciona Sí para que todos puedan entrar.
-                        </li>
-                        <li><strong>Tu correo electrónico:</strong> Escribe tu correo (de preferencia Gmail). Escríbelo
-                            2 veces para confirmarlo.</li>
-                        <li><strong>Descripción del grupo:</strong> Escribe una breve descripción del grupo. <em>(No
-                                importa mucho qué pongas, con que tenga sentido).</em></li>
-                        <li><strong>Tu ciudad (opcional):</strong> ⚠️ No es recomendable poner tu ciudad real para
-                            evitar problemas de privacidad.</li>
-                        <li><strong>Categorías:</strong> Puedes elegir una, pero no es obligatorio.</li>
-                        <li><strong>Etiquetas:</strong> Escribe de qué trata tu grupo. Deben ir separadas por coma y con
-                            espacios entre palabras. <em>Ejemplo: jugar minecraft, amigos 23 años, salir de fiesta,
-                                memes divertidos.</em></li>
-                        <li><strong>Aceptar condiciones:</strong> Marca la casilla: ☑️ He leído y acepto las condiciones
-                            de uso y la privacidad. Haz clic en Continuar.</li>
-                        <li><strong>Revisar y publicar:</strong> Revisa que el nombre, descripción y correo estén
-                            correctos. Si hay un error, corrígelo. Si todo está bien, haz clic en Correcto, Publicar ✅.
-                        </li>
-                        <li><strong>✅ ¡Y listo!</strong> Tu grupo quedará publicado en la página.</li>
+                        <li>El bot detecta actividad útil o inactividad del staff.</li>
+                        <li>Los inspectores revisan puntos, contexto y desempeño real.</li>
+                        <li>Si alguien cae a 0, se genera alerta y se abre apelación.</li>
+                        <li>Los Owners revisan el caso y deciden si confirmar o restaurar.</li>
+                        <li>Las renuncias se podrán enviar desde la página para que el bot quite el rol.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="staff" class="tab-content">
+                <h2>Staff</h2>
+
+                <div class="card">
+                    <h3>Resumen del equipo</h3>
+                    <p>Vista general del staff actual con rango principal, cargos asignados y estado operativo.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Rango</th>
+                                <th>Cargos</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staff-table-body">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Responsables clave</h3>
+                    <div class="info-grid">
+                        <article>
+                            <h4>Owners</h4>
+                            <p>Dirigen el proyecto, toman decisiones finales y resuelven apelaciones o degradaciones.</p>
+                        </article>
+                        <article>
+                            <h4>Admins</h4>
+                            <p>Supervisan la moderación, apoyan la gestión general y sostienen el orden del servidor.</p>
+                        </article>
+                        <article>
+                            <h4>Testers</h4>
+                            <p>Representan el primer nivel del staff operativo y ayudan con vigilancia, reportes y
+                                pruebas.</p>
+                        </article>
+                        <article>
+                            <h4>Inspectores</h4>
+                            <p>Llevan control de actividad, puntos, observaciones y casos que deben escalarse.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="points" class="tab-content">
+                <h2>Sistema de Puntos</h2>
+
+                <div class="card">
+                    <h3>Puntos del staff</h3>
+                    <table id="staff-points">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Rango</th>
+                                <th>Puntos</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staff-points-body">
+                        </tbody>
+                    </table>
+
+                    <div class="status-info">
+                        <h3>Estados de puntos</h3>
+                        <ul>
+                            <li>0 puntos: <span class="points-0 circle"></span> Crítico</li>
+                            <li>1 a 2 puntos: <span class="points-2 circle"></span> Riesgo alto</li>
+                            <li>3 a 4 puntos: <span class="points-4 circle"></span> Seguimiento</li>
+                            <li>5 a 6 puntos: <span class="points-6 circle"></span> Estable</li>
+                            <li>7 puntos: <span class="points-7 circle"></span> Óptimo</li>
+                        </ul>
+                        <p>Máximo actual definido: <strong>7 puntos</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Criterios de evaluación</h3>
+                    <ul>
+                        <li>Actividad básica en Discord puede sumar una cantidad pequeña como referencia.</li>
+                        <li>El cumplimiento real del cargo pesa más que solo escribir mensajes.</li>
+                        <li>Los inspectores ajustan puntos cuando detectan buen desempeño o incumplimiento.</li>
+                        <li>Todo cambio importante debería registrar autor, motivo y fecha cuando se conecte el sistema
+                            real.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rangos" class="tab-content">
+                <h2>Rangos y Cargos</h2>
+
+                <div class="card">
+                    <h3>Escala de rangos</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rango</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>👑 Owner</td>
+                                <td>Máxima autoridad. Dirige la comunidad, coordina el staff y toma decisiones finales.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>🔰 Admin</td>
+                                <td>Segundo nivel de autoridad. Supervisa moderación y mantiene el orden general.</td>
+                            </tr>
+                            <tr>
+                                <td>⚙️ Tester</td>
+                                <td>Primer nivel de moderación. Apoya con vigilancia, reportes y tareas básicas.</td>
+                            </tr>
+                            <tr>
+                                <td>👤 Usuario</td>
+                                <td>Estado base cuando una persona no forma parte activa del staff.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Cargos operativos</h3>
+                    <div class="info-grid">
+                        <article>
+                            <h4>【📋】Inspector</h4>
+                            <p>Gestiona actividad, puntos, control de desempeño y reportes hacia los Owners.</p>
+                        </article>
+                        <article>
+                            <h4>【🛡️】Mod</h4>
+                            <p>Se enfoca en normas, reportes, sanciones y mantenimiento del orden de la comunidad.</p>
+                        </article>
+                        <article>
+                            <h4>【🤝】Colaborador</h4>
+                            <p>Apoya en pruebas, tareas especiales y cualquier necesidad del proyecto.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Cadena de degradación</h3>
+                    <p class="highlight-line">Owner → Admin → Tester → Usuario</p>
+                    <p>Cuando un miembro llegue a 0 puntos, el sistema deberá degradar al siguiente nivel y abrir un
+                        canal privado de apelación durante 24 horas.</p>
+                </div>
+            </section>
+
+            <section id="appeals" class="tab-content">
+                <h2>Apelaciones y Renuncias</h2>
+
+                <div class="card">
+                    <h3>Casos abiertos</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Miembro</th>
+                                <th>Motivo</th>
+                                <th>Plazo</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appeals-table-body">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>Protocolo de apelación</h3>
+                    <ol>
+                        <li>Al llegar a 0 puntos se abre un canal privado de apelación.</li>
+                        <li>Entran el miembro afectado, los inspectores y los Owners.</li>
+                        <li>El caso debe resolverse dentro de un plazo de 24 horas.</li>
+                        <li>Solo los Owners deciden si se confirma la degradación o se restaura el rango.</li>
                     </ol>
                 </div>
 
                 <div class="card">
-                    <h3>3. Guía de las Tablas</h3>
-                    <h4>📊 Guía de funcionamiento de la tabla de puntos</h4>
-                    <h4>⚔️ Tabla de puntos de Admins</h4>
-                    <ul>
-                        <li>Cada <strong>admin</strong> empieza con una cantidad determinada de puntos.</li>
-                        <li>Si los puntos llegan a <strong>0</strong>, se le baja de rango automáticamente.</li>
-                        <li>Cada día se <strong>resta -1 punto</strong> de forma automática a todos los admins.</li>
-                        <li>Los puntos se pueden recuperar o aumentar de la siguiente forma:
-                            <ul>
-                                <li>Cumplir con las labores de administrador: <strong>+2 puntos</strong></li>
-                                <li>Ser activo en la comunidad: <strong>+1 punto</strong></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <h4>🌊 Tabla de Oleadas</h4>
-                    <ul>
-                        <li>Esta tabla solo sube cuando los <strong>Owners realizan oleadas</strong>.</li>
-                        <li>Las oleadas son eventos o actividades especiales organizadas por los Owners que sirven para
-                            que usuarios entren a los grupos de la comunidad.</li>
-                        <li>Cuantas más oleadas se hagan, más sube la puntuación en esta tabla.</li>
-                    </ul>
-                    <h4>⚠️ Importante</h4>
-                    <ul>
-                        <li>Si un admin no participa ni cumple sus tareas, sus puntos bajarán poco a poco hasta llegar a
-                            0.</li>
-                        <li>Mantenerse activo y cumplir con el rol de admin asegura que no pierdas tu rango.</li>
-                        <li>Las oleadas dependen <strong>exclusivamente de los Owners</strong>, no de los admins
-                            comunes.</li>
-                        <li>Cuando el contador llegue a 0, tendrás un plazo de 12 horas antes de perder los privilegios
-                            de administrador.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Info -->
-            <section id="info" class="tab-content">
-                <h2>Info</h2>
-                <div class="card">
-                    <h3>❓ Preguntas Frecuentes</h3>
-                    <p><b>1. ¿Qué son las oleadas?</b><br> Son los momentos en que se publica un nuevo grupo en la
-                        página.</p>
-                    <p><b>2. ¿Qué son los rangos?</b><br> Jerarquía de la administración según el rol y su importancia.
-                    </p>
-                    <p><b>3. Si soy admin, ¿qué debo hacer?</b><br> Consulta la sección de rangos para conocer tu rol y
-                        deberes.</p>
-                    <p><b>4. ¿Qué pasa si rompo las reglas?</b><br> Se descuentan puntos de tu tabla y puedes ser
-                        degradado o expulsado.</p>
-                    <p><b>5. ¿Puedo renunciar a ser admin?</b><br> Sí, pero perderás todos los privilegios. Además,
-                        <b>si sales del grupo de admins, se tomará automáticamente como renuncia definitiva</b>.</p>
-                </div>
-
-                <div class="card">
-                    <h3>📜 Términos y Condiciones</h3>
-                    <h4>Definiciones</h4>
-                    <p>Jow es el dueño absoluto de la comunidad y toma las decisiones finales. Los owners pueden
-                        decidir, pero no contradecir a Jow. Los admins de menor jerarquía solo deciden si están de
-                        acuerdo todos.</p>
-
-                    <h4>Aceptación</h4>
-                    <p>Si usas la comunidad aceptas estas condiciones, incluso si no las lees.</p>
-
-                    <h4>Reglas de Admin</h4>
-                    <ul>
-                        <li>No quitarse admin entre sí. <b>-2 puntos</b></li>
-                        <li>Los owners pueden bajar admins de menor rango, pero no a otro owner salvo mala conducta.
-                            <b>-2 puntos</b></li>
-                        <li>No eliminar grupos de la comunidad. <b>-3 puntos</b></li>
-                        <li>No añadir grupos si no eres owner. <b>-1 punto</b></li>
-                        <li>No pelear con otros admins. <b>-1 punto</b></li>
-                        <li>Debes obedecer si se te pide algo. <b>-1 punto</b></li>
-                        <li>No asumir un rol que no te corresponde. <b>-1 punto</b></li>
-                        <li>No abusar de tu poder. <b>-2 puntos</b></li>
-                        <li>No conspirar contra los owners. <b>-1 punto</b></li>
-                        <li>No ignorar a usuarios que rompan reglas. <b>-2 puntos</b></li>
-                        <li>No banear gente sin razón. <b>-2 puntos</b></li>
-                        <li>No romper las reglas de los grupos. <b>-2 puntos</b></li>
-                    </ul>
-
-                    <h4>Propiedad</h4>
-                    <p>Si eres owner y creaste un grupo, tú mandas en él. Los grupos que no creaste no te pertenecen.
-                    </p>
-
-                    <h4>Limitaciones</h4>
-                    <p>La comunidad no se hace responsable por pérdidas de datos, problemas técnicos o cualquier daño
-                        derivado del uso del servicio.</p>
-                </div>
-            </section>
-
-            <!-- Puntos Admin -->
-            <section id="admin" class="tab-content">
-                <h2>Puntos Admin</h2>
-                <div class="card">
-                    <table id="admin-points">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Puntos Admin</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-points-body">
-                            <!-- Los datos se cargan dinamicamente desde JS -->
-                        </tbody>
-                    </table>
-
-                    <div class="status-info">
-                        <h3>Estados de Puntos Admin</h3>
-                        <ul>
-                            <li>0 puntos: <span class="admin-0 circle">⚠️</span> - Crítico</li>
-                            <li>1 punto: <span class="admin-1 circle"></span> - Bajo</li>
-                            <li>2 puntos: <span class="admin-2 circle"></span> - Mejorable</li>
-                            <li>3 puntos: <span class="admin-3 circle"></span> - Medio</li>
-                            <li>4 puntos: <span class="admin-4 circle"></span> - Okey</li>
-                            <li>5 puntos: <span class="admin-5 circle"></span> - Bien</li>
-                        </ul>
-                        <p>Puntos máximos posibles: 5</p>
+                    <h3>Renuncia voluntaria</h3>
+                    <p>La página tendrá una opción para que cualquier miembro del staff pueda renunciar a su cargo o
+                        rango. Cuando el sistema esté conectado, el bot quitará el rol en Discord y dejará registro del
+                        movimiento.</p>
+                    <div class="note">
+                        Esta sección queda preparada como plantilla. Más adelante se añadirá el botón real de renuncia y
+                        el historial correspondiente.
                     </div>
                 </div>
             </section>
 
-            <!-- Puntos Oleada -->
-            <section id="oleada" class="tab-content">
-                <h2>Puntos Oleada</h2>
+            <section id="rules" class="tab-content">
+                <h2>Normas</h2>
+
                 <div class="card">
-                    <table id="oleada-points">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Puntos Oleada</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody id="oleada-points-body">
-                            <!-- Los datos se cargan dinamicamente desde JS -->
-                        </tbody>
-                    </table>
-
-                    <div class="status-info">
-                        <h3>Estados de Puntos Oleada</h3>
-                        <ul>
-                            <li>0 puntos: <span class="oleada-0 circle">⚠️</span> - Crítico</li>
-                            <li>1 punto: <span class="oleada-1 circle"></span> - Bajo</li>
-                            <li>2 puntos: <span class="oleada-2 circle"></span> - Medio</li>
-                            <li>3 puntos: <span class="oleada-3 circle"></span> - Bien</li>
-                        </ul>
-                        <p>Puntos máximos posibles: 3</p>
+                    <h3>Sección en preparación</h3>
+                    <p>Aquí irá la versión ordenada y definitiva de las normas del servidor, diferenciando reglas
+                        generales, sanciones, libertad permitida y procedimientos del staff.</p>
+                    <div class="note">
+                        Pendiente de rellenar con el texto final de normas, sistema de warns, contenido prohibido,
+                        canales administrativos y criterios de sanción.
                     </div>
+                </div>
 
-                    <h3>Grupos a los que deben hacer oleada</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Grupo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                             <!-- Modificar a los que los owners deben hacer oleada -->
-                            <tr><td>Celeste, Nose</td><td>Bot</td></tr>
-                            <tr><td>Leandro</td><td>Porno</td></tr>
-                            <tr><td>E</td><td>Juegos</td></tr>
-                        </tbody>
-                    </table>
-
-                    <p class="note">
-                        Si el enlace del grupo fue suspendido temporalmente, dígale a uno de los Owners
-                        que están haciendo oleadas en los grupos si pueden hacer oleada ahí.
-                    </p>
+                <div class="card">
+                    <h3>Estructura prevista</h3>
+                    <ul>
+                        <li>Filosofía del servidor y libertad permitida.</li>
+                        <li>Contenido totalmente prohibido.</li>
+                        <li>Publicidad, negocios y explotación de huecos.</li>
+                        <li>Uso correcto de canales y tickets.</li>
+                        <li>Sistema de warns y escalado de sanciones.</li>
+                        <li>Reglas específicas del staff.</li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- Rangos -->
-            <section id="rangos" class="tab-content">
-                <h2>Rangos de Admin</h2>
-                <div class="card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Rango</th>
-                                <th>Nombre(s)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>👑 Creador</td>
-                                <td><b>Jow, Agus</b></td>
-                            </tr>
-                             <!-- Modicar rangos de admins cuando sea necesario -->
-                            <tr><td>🛡️ Owners</td><td>Celeste, Nose, Leandro, E</td></tr>
-                            <tr><td>⚔️ OfAdmins</td><td>Josue, Shady, Gaxoli, Juan, Nose2</td></tr>
-                            <tr><td>📋 PreAdmins</td><td>Diego, Kev, Yuka, Vahgo, Joel</td></tr>
-                            <tr><td>🤖 Bots</td><td>GataBot</td></tr>
-                        </tbody>
-                    </table>
-
-                    <h3>Grupos asignados a PreAdmins</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>PreAdmin</th>
-                                <th>Grupo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                             <!-- Modificar grupos administrados por PreAdmins -->
-                            <tr><td>Yuka, kev</td><td>Bot</td></tr>
-                            <tr><td>Nose2, Vahgo</td><td>Porno</td></tr>
-                            <tr><td>Diego, Joel</td>td>Juegos</td></tr>
-                        </tbody>
-                    </table>
-
-                    <div class="card">
-                        <h3>2. Rangos de Admins</h3>
-                        <h4>👑 <b>Owners</b> (Dueños / Administradores principales)</h4>
-                        <p>Son el máximo rango dentro de la comunidad.</p>
-                        <p>Tienen la última palabra en las decisiones importantes.</p>
-                        <p>Se encargan de organizar y planear las oleadas <i>(eventos, publicaciones o campañas que haga
-                                la comunidad)</i>.</p>
-                        <p>Supervisan que todo funcione correctamente.</p>
-
-                        <h4>🛡️ <b>OfAdmins</b> (Oficiales Administradores)</h4>
-                        <p>Son el apoyo directo de los Owners.</p>
-                        <p>Ayudan con las tareas que los Owners les asignen.</p>
-                        <p>Tienen permiso para administrar los grupos, gestionando miembros y configuraciones.</p>
-                        <p>Actúan como "mano derecha" de los Owners.</p>
-
-                        <h4>⚔️ <b>UnAdmins</b> (Administradores comunes)</h4>
-                        <p>Su función principal es mantener el orden en los grupos.</p>
-                        <p>Se encargan de moderar chats, borrando mensajes, contenido o usuarios que rompan las reglas.
-                        </p>
-                        <p>No toman decisiones grandes, pero mantienen la disciplina.</p>
-
-                        <h4>🤖 <b>Bots</b></h4>
-                        <p>Son cuentas automatizadas programadas para hacer tareas de forma automática.</p>
-                        <p>Pueden dar avisos, aplicar sanciones, dar la bienvenida a nuevos miembros, eliminar spam o
-                            realizar acciones rápidas que faciliten la administración.</p>
-                    </div>
-
-                    <h3>Rangos en servers</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Rango</th>
-                                <th>Nombre(s)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>👑 Creador</td>
-                                <td><b>Jow</b></td>
-                            </tr>
-                            <tr>
-                                <td>🛡️ Owners</td>
-                                <td>Josue, Agus</td>
-                            </tr>
-                            <tr>
-                                <td>⚔️ Moderadores</td>
-                                <td>---</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Añadir y quitar novedades de forma decendente -->
             <section id="novedades" class="tab-content">
                 <h2>Novedades</h2>
+
                 <div class="novedades-container">
                     <div class="card">
-                        <h3>Subidas de rango</h3>
-                        <p>Agus ha sido subido a creador</p>
-                        <div class="date">Fecha: 1/10/2025 4:36 PM</div>
+                        <h3>Nueva plantilla del panel</h3>
+                        <p>La página fue reorganizada para adaptarse al staff de Discord, eliminando secciones viejas y
+                            alineando el sistema con rangos, cargos, apelaciones y normas.</p>
+                        <div class="date">Fecha: 15/06/2026</div>
                     </div>
 
                     <div class="card">
-                         <h3>Subidas de rango</h3>
-                        <p>Nose2 ha sido subido a OfAdmin para ocupar un hueco que existia</p>
-                        <div class="date">Fecha: 1/10/2025 4:25 PM</div>
+                        <h3>Estructura de apelaciones</h3>
+                        <p>Se preparó la lógica visual para apelaciones privadas de 24 horas cuando un miembro llegue a 0
+                            puntos.</p>
+                        <div class="date">Fecha: 15/06/2026</div>
                     </div>
-                       
+
                     <div class="card">
-                     <h3>Nueva pestaña y subidas de rango</h3>
-                        <p>Nose2 ha sido nombrado owner, Diego fue degradado a PreAdmin y Nose fue añadido a la
-                            administración</p>
-                        <div class="date">Fecha: 23/08/2025 4:36 PM</div>
-                    </div>
-                        
-                    <div class="card">
-                       <h3>Nuevos admins y removidas de rango</h3>
-                        <p>Shady y Nose2 han sido nombrados PreAdmin, Gregory fue expulsado de la administración por
-                            rebelarse</p>
-                        <div class="date">Fecha: 22/08/2025 7:48 PM</div>
-                    </div>
-                      
-                    <div class="card">
-                         <h3>Nueva norma</h3>
-                        <p>Si tu contador llega a 0 tendrás un tiempo límite de 12 horas antes de que seas removido de
-                            admin</p>
-                        <div class="date">Fecha: 20/08/2025 1:35 PM</div>
+                        <h3>Sistema de puntos actualizado</h3>
+                        <p>La plantilla ya trabaja con un máximo de 7 puntos y con la idea de sumar actividad pequeña más
+                            revisión manual por inspectores.</p>
+                        <div class="date">Fecha: 15/06/2026</div>
                     </div>
                 </div>
             </section>

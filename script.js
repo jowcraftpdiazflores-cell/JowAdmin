@@ -1,35 +1,75 @@
-// Datos iniciales
-let adminUsers = [
-  { nombre: "Vahgo", puntos_admin: 2 },
-  { nombre: "Nose", puntos_admin: 3 },
-  { nombre: "Nose2", puntos_admin: 2 },
-  { nombre: "Diego", puntos_admin: 2 },
-  { nombre: "Josue", puntos_admin: 3 },
-  { nombre: "Gaxoli", puntos_admin: 4 },
-  { nombre: "Celeste", puntos_admin: 5 },
-  { nombre: "Shady", puntos_admin: 5 },
-  { nombre: "Yuka", puntos_admin: 2 },
-  { nombre: "Joel", puntos_admin: 2 },
-  { nombre: "Juan", puntos_admin: 3 },
+const STORAGE_KEY = "staffMembers";
+const APPEALS_KEY = "appeals";
+const LAST_UPDATE_KEY = "lastPointUpdate";
+const MAX_POINTS = 7;
+
+let staffMembers = [
+  {
+    nombre: "Jow",
+    rango: "Owner",
+    cargos: ["Inspector"],
+    puntos: 7,
+    estadoManual: "Activo",
+  },
+  {
+    nombre: "Agus",
+    rango: "Owner",
+    cargos: ["Colaborador"],
+    puntos: 6.8,
+    estadoManual: "Activo",
+  },
+  {
+    nombre: "Celeste",
+    rango: "Admin",
+    cargos: ["Inspector", "Mod"],
+    puntos: 5.6,
+    estadoManual: "Seguimiento",
+  },
+  {
+    nombre: "Leandro",
+    rango: "Admin",
+    cargos: ["Mod"],
+    puntos: 4.2,
+    estadoManual: "Seguimiento",
+  },
+  {
+    nombre: "Yuka",
+    rango: "Tester",
+    cargos: ["Colaborador"],
+    puntos: 2.4,
+    estadoManual: "En riesgo",
+  },
+  {
+    nombre: "Joel",
+    rango: "Tester",
+    cargos: ["Mod"],
+    puntos: 1.5,
+    estadoManual: "En riesgo",
+  },
 ];
 
-let oleadaUsers = [
-  { nombre: "Nose", puntos_oleada: 1 },
-  { nombre: "Celeste", puntos_oleada: 1 },
-  { nombre: "Leandro", puntos_oleada: 3 },
-  { nombre: "E", puntos_oleada: 1 },
+let appeals = [
+  {
+    miembro: "Diego",
+    motivo: "Llegó a 0 puntos y fue degradado a Usuario",
+    plazo: "23h restantes",
+    estado: "Abierta",
+  },
+  {
+    miembro: "Shady",
+    motivo: "Revisión por inactividad prolongada",
+    plazo: "12h restantes",
+    estado: "En revisión",
+  },
 ];
 
-// Función para inicializar la aplicación
 function initApp() {
   setupTabs();
   loadDataFromStorage();
-  renderAdminTable();
-  renderOleadaTable();
+  renderAll();
   setupDailyPointDecrease();
 }
 
-// Configuración de las pestañas
 function setupTabs() {
   const tabs = document.querySelectorAll(".tab");
 
@@ -37,36 +77,33 @@ function setupTabs() {
     tab.addEventListener("click", () => {
       const tabId = tab.getAttribute("data-tab");
 
-      // Remover clase active de todas las pestañas y contenidos
-      document
-        .querySelectorAll(".tab")
-        .forEach((t) => t.classList.remove("active"));
-      document
-        .querySelectorAll(".tab-content")
-        .forEach((c) => c.classList.remove("active"));
+      document.querySelectorAll(".tab").forEach((item) => {
+        item.classList.remove("active");
+      });
 
-      // Agregar clase active a la pestaña y contenido seleccionados
+      document.querySelectorAll(".tab-content").forEach((section) => {
+        section.classList.remove("active");
+      });
+
       tab.classList.add("active");
       document.getElementById(tabId).classList.add("active");
     });
   });
 }
 
-// Cargar datos desde localStorage
 function loadDataFromStorage() {
-  const savedAdminData = localStorage.getItem("adminUsers");
-  const savedOleadaData = localStorage.getItem("oleadaUsers");
-  const lastUpdate = localStorage.getItem("lastPointUpdate");
+  const savedStaffData = localStorage.getItem(STORAGE_KEY);
+  const savedAppeals = localStorage.getItem(APPEALS_KEY);
+  const lastUpdate = localStorage.getItem(LAST_UPDATE_KEY);
 
-  if (savedAdminData) {
-    adminUsers = JSON.parse(savedAdminData);
+  if (savedStaffData) {
+    staffMembers = JSON.parse(savedStaffData);
   }
 
-  if (savedOleadaData) {
-    oleadaUsers = JSON.parse(savedOleadaData);
+  if (savedAppeals) {
+    appeals = JSON.parse(savedAppeals);
   }
 
-  // Verificar si necesitamos actualizar puntos
   if (lastUpdate) {
     const lastUpdateDate = new Date(lastUpdate);
     const today = new Date();
@@ -75,184 +112,222 @@ function loadDataFromStorage() {
     );
 
     if (daysSinceLastUpdate >= 1) {
-      decreaseAdminPoints(daysSinceLastUpdate);
+      decreasePoints(daysSinceLastUpdate);
     }
   } else {
-    // Primera vez, guardar la fecha actual
-    localStorage.setItem("lastPointUpdate", new Date().toISOString());
+    localStorage.setItem(LAST_UPDATE_KEY, new Date().toISOString());
   }
 }
 
-// Guardar datos en localStorage
 function saveDataToStorage() {
-  localStorage.setItem("adminUsers", JSON.stringify(adminUsers));
-  localStorage.setItem("oleadaUsers", JSON.stringify(oleadaUsers));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(staffMembers));
+  localStorage.setItem(APPEALS_KEY, JSON.stringify(appeals));
 }
 
-// Configurar la disminución diaria de puntos
 function setupDailyPointDecrease() {
-  // Verificar cada día si necesitamos actualizar los puntos
   setInterval(() => {
-    const lastUpdate = localStorage.getItem("lastPointUpdate");
+    const lastUpdate = localStorage.getItem(LAST_UPDATE_KEY);
 
-    if (lastUpdate) {
-      const lastUpdateDate = new Date(lastUpdate);
-      const today = new Date();
-      const daysSinceLastUpdate = Math.floor(
-        (today - lastUpdateDate) / (1000 * 60 * 60 * 24)
-      );
-
-      if (daysSinceLastUpdate >= 1) {
-        decreaseAdminPoints(daysSinceLastUpdate);
-      }
+    if (!lastUpdate) {
+      localStorage.setItem(LAST_UPDATE_KEY, new Date().toISOString());
+      return;
     }
-  }, 60 * 60 * 1000); // Verificar cada hora
+
+    const lastUpdateDate = new Date(lastUpdate);
+    const today = new Date();
+    const daysSinceLastUpdate = Math.floor(
+      (today - lastUpdateDate) / (1000 * 60 * 60 * 24)
+    );
+
+    if (daysSinceLastUpdate >= 1) {
+      decreasePoints(daysSinceLastUpdate);
+    }
+  }, 60 * 60 * 1000);
 }
 
-// Disminuir puntos de admin
-function decreaseAdminPoints(days = 1) {
+function decreasePoints(days = 1) {
   let updated = false;
 
-  for (let i = 0; i < adminUsers.length; i++) {
-    const newPoints = Math.max(0, adminUsers[i].puntos_admin - days);
+  staffMembers = staffMembers.map((member) => {
+    const nuevosPuntos = roundPoints(Math.max(0, member.puntos - days));
 
-    if (newPoints !== adminUsers[i].puntos_admin) {
-      adminUsers[i].puntos_admin = newPoints;
+    if (nuevosPuntos !== member.puntos) {
       updated = true;
     }
-  }
+
+    return {
+      ...member,
+      puntos: nuevosPuntos,
+    };
+  });
 
   if (updated) {
     saveDataToStorage();
-    localStorage.setItem("lastPointUpdate", new Date().toISOString());
-    renderAdminTable();
+    localStorage.setItem(LAST_UPDATE_KEY, new Date().toISOString());
+    renderAll();
 
-    // Mostrar notificación si estamos en la pestaña de admin
-    if (document.getElementById("admin").classList.contains("active")) {
+    const pointsSection = document.getElementById("points");
+    if (pointsSection && pointsSection.classList.contains("active")) {
       showNotification(
-        `Se han actualizado los puntos de admin (-${days} punto${
-          days > 1 ? "s" : ""
-        })`
+        `Se aplicó la reducción automática de puntos (-${days} por día).`
       );
     }
   }
 }
 
-// Renderizar tabla de admin
-function renderAdminTable() {
-  const adminTableBody = document.getElementById("admin-points-body");
-  adminTableBody.innerHTML = "";
+function renderAll() {
+  renderStaffTable();
+  renderPointsTable();
+  renderAppealsTable();
+  renderDashboardStats();
+}
 
-  adminUsers.forEach((user) => {
+function renderStaffTable() {
+  const staffTableBody = document.getElementById("staff-table-body");
+  staffTableBody.innerHTML = "";
+
+  staffMembers.forEach((member) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-            <td>${user.nombre}</td>
-            <td>${user.puntos_admin}</td>
-            <td>${getAdminState(user.puntos_admin)}</td>
-        `;
-    adminTableBody.appendChild(row);
-  });
-}
-
-// Obtener estado visual para admin
-function getAdminState(puntos) {
-  if (puntos === 0) return `<span class="admin-0 circle">⚠️</span>`;
-  if (puntos === 1) return `<span class="admin-1 circle"></span>`;
-  if (puntos === 2) return `<span class="admin-2 circle"></span>`;
-  if (puntos === 3) return `<span class="admin-3 circle"></span>`;
-  if (puntos === 4) return `<span class="admin-4 circle"></span>`;
-  return `<span class="admin-5 circle"></span>`;
-}
-
-// Renderizar tabla de oleada
-function renderOleadaTable() {
-  const oleadaTableBody = document.getElementById("oleada-points-body");
-  oleadaTableBody.innerHTML = "";
-
-  oleadaUsers.forEach((user) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-            <td>${user.nombre}</td>
-            <td>${user.puntos_oleada}</td>
-            <td>${getOleadaState(user.puntos_oleada)}</td>
-        `;
-    oleadaTableBody.appendChild(row);
-  });
-}
-
-// Obtener estado visual para oleada
-function getOleadaState(puntos) {
-  if (puntos === 0) return `<span class="oleada-0 circle">⚠️</span>`;
-  if (puntos === 1) return `<span class="oleada-1 circle"></span>`;
-  if (puntos === 2) return `<span class="oleada-2 circle"></span>`;
-  return `<span class="oleada-3 circle"></span>`;
-}
-
-// Mostrar notificación
-function showNotification(message) {
-  // Crear elemento de notificación
-  const notification = document.createElement("div");
-  notification.textContent = message;
-  notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #3498db;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 4px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-        transition: opacity 0.3s;
+      <td>${member.nombre}</td>
+      <td>${member.rango}</td>
+      <td>${renderTags(member.cargos)}</td>
+      <td>${getManualStatusBadge(member.estadoManual)}</td>
     `;
+    staffTableBody.appendChild(row);
+  });
+}
+
+function renderPointsTable() {
+  const pointsTableBody = document.getElementById("staff-points-body");
+  pointsTableBody.innerHTML = "";
+
+  staffMembers.forEach((member) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${member.nombre}</td>
+      <td>${member.rango}</td>
+      <td>${member.puntos.toFixed(1)}</td>
+      <td>${getPointsState(member.puntos)}</td>
+    `;
+    pointsTableBody.appendChild(row);
+  });
+}
+
+function renderAppealsTable() {
+  const appealsTableBody = document.getElementById("appeals-table-body");
+  appealsTableBody.innerHTML = "";
+
+  appeals.forEach((appeal) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${appeal.miembro}</td>
+      <td>${appeal.motivo}</td>
+      <td>${appeal.plazo}</td>
+      <td>${getAppealStatusBadge(appeal.estado)}</td>
+    `;
+    appealsTableBody.appendChild(row);
+  });
+}
+
+function renderDashboardStats() {
+  const totalStaff = document.getElementById("total-staff");
+  const totalInspectors = document.getElementById("total-inspectors");
+  const staffAtRisk = document.getElementById("staff-at-risk");
+  const openAppeals = document.getElementById("open-appeals");
+
+  totalStaff.textContent = String(staffMembers.length);
+  totalInspectors.textContent = String(
+    staffMembers.filter((member) => member.cargos.includes("Inspector")).length
+  );
+  staffAtRisk.textContent = String(
+    staffMembers.filter((member) => member.puntos <= 2).length
+  );
+  openAppeals.textContent = String(
+    appeals.filter((appeal) => appeal.estado !== "Cerrada").length
+  );
+}
+
+function renderTags(tags) {
+  return tags
+    .map((tag) => `<span class="tag">${tag}</span>`)
+    .join(" ");
+}
+
+function getManualStatusBadge(status) {
+  const normalizedStatus = normalizeStatus(status);
+  return `<span class="status-badge status-${normalizedStatus}">${status}</span>`;
+}
+
+function getAppealStatusBadge(status) {
+  const normalizedStatus = normalizeStatus(status);
+  return `<span class="status-badge status-${normalizedStatus}">${status}</span>`;
+}
+
+function getPointsState(points) {
+  if (points === 0) {
+    return `<span class="points-state"><span class="points-0 circle"></span>Crítico</span>`;
+  }
+
+  if (points <= 2) {
+    return `<span class="points-state"><span class="points-2 circle"></span>Riesgo alto</span>`;
+  }
+
+  if (points <= 4) {
+    return `<span class="points-state"><span class="points-4 circle"></span>Seguimiento</span>`;
+  }
+
+  if (points <= 6) {
+    return `<span class="points-state"><span class="points-6 circle"></span>Estable</span>`;
+  }
+
+  return `<span class="points-state"><span class="points-7 circle"></span>Óptimo</span>`;
+}
+
+function roundPoints(value) {
+  return Math.round(value * 10) / 10;
+}
+
+function normalizeStatus(value) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
+}
+
+function showNotification(message) {
+  const notification = document.createElement("div");
+  notification.className = "notification";
+  notification.textContent = message;
 
   document.body.appendChild(notification);
 
-  // Remover después de 3 segundos
   setTimeout(() => {
-    notification.style.opacity = "0";
+    notification.classList.add("hide");
+
     setTimeout(() => {
-      if (notification.parentNode) {
-        notification.parentNode.removeChild(notification);
-      }
+      notification.remove();
     }, 300);
   }, 3000);
 }
 
-// Función para actualizar puntos manualmente (para uso del administrador)
-function updateAdminPoints(nombre, nuevosPuntos) {
-  const userIndex = adminUsers.findIndex((user) => user.nombre === nombre);
+function updateStaffPoints(nombre, nuevosPuntos) {
+  const memberIndex = staffMembers.findIndex((member) => member.nombre === nombre);
 
-  if (userIndex !== -1) {
-    adminUsers[userIndex].puntos_admin = Math.max(0, Math.min(5, nuevosPuntos));
-    saveDataToStorage();
-    renderAdminTable();
-    return true;
+  if (memberIndex === -1) {
+    return false;
   }
 
-  return false;
+  staffMembers[memberIndex].puntos = roundPoints(
+    Math.max(0, Math.min(MAX_POINTS, nuevosPuntos))
+  );
+
+  saveDataToStorage();
+  renderAll();
+  return true;
 }
 
-// Función para actualizar puntos de oleada manualmente
-function updateOleadaPoints(nombre, nuevosPuntos) {
-  const userIndex = oleadaUsers.findIndex((user) => user.nombre === nombre);
-
-  if (userIndex !== -1) {
-    oleadaUsers[userIndex].puntos_oleada = Math.max(
-      0,
-      Math.min(3, nuevosPuntos)
-    );
-    saveDataToStorage();
-    renderOleadaTable();
-    return true;
-  }
-
-  return false;
-}
-
-// Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", initApp);
 
-// Hacer las funciones de actualización disponibles globalmente para el administrador
-window.updateAdminPoints = updateAdminPoints;
-window.updateOleadaPoints = updateOleadaPoints;
+window.updateStaffPoints = updateStaffPoints;
